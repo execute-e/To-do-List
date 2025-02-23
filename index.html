@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="main">
+        <div id="container">
+            <div id="menu">
+                <p>You have <span id="tasks-value">0</span> tasks</p>
+                <button class="btn" id="add-task">&#43;</button>
+            </div>
+            <div id="select">
+                <select name="w" id="select-tasks">
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                    <option value="deleted">Deleted</option>
+                </select>
+            </div>
+            <div id="content">
+                <div id="active-tasks">
+                    
+                </div>
+            </div>
+            <p id="result">HELLO</p>
+        </div>
+    </div>
+    
+    
+    
+    <div class="task" id="example-active"> 
+        <div class="task-text">
+            <h4>Example</h4>
+            <p>Need to do</p>
+        </div>
+        <div class="task-buttons">
+            <button class="btn complete-task">&#10003;</button>
+            <button class="btn delete-task">&#10007;</button>
+        </div>
+    </div>
+    
+    
+    
+    <script src="main.js"></script>
+</body>
+</html>
