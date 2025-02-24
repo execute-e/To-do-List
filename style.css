@@ -65,6 +65,6 @@
     background-color: antiquewhite;
 }
 
-#example-active {
+.example {
     display: none;
 }
