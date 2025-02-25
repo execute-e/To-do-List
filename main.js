@@ -34,10 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             taskButtons.innerHTML = '';
 
-            const restoreButton = document.createElement('button');
-            restoreButton.className = 'btn restore-task';
-            restoreButton.textContent = '↻';
+            const restoreButton = createButton('restore-task', '↻');
+            const removeButton = createButton('remove-task', '🗑️');
+
             taskButtons.append(restoreButton);
+            taskButtons.append(removeButton);
 
             deletedTasks.append(taskToDelete);
             updateTasksVisibility(selector.value);
@@ -48,9 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             taskButtons.innerHTML = '';
 
-            const restoreButton = document.createElement('button');
-            restoreButton.className = 'btn restore-task';
-            restoreButton.textContent = '↻';
+            const restoreButton = createButton('restore-task', '↻');
+
             taskButtons.append(restoreButton);
 
             completedTasks.append(taskToConfirm);
@@ -61,21 +61,23 @@ document.addEventListener('DOMContentLoaded', () => {
     //restore task from deleted tasks listener
 
     deletedTasks.addEventListener('click', (event) => {
-        const taskToRestore = event.target.closest('.task');
-        const taskButtons = taskToRestore.querySelector('.task-buttons');
+        const chosenTask = event.target.closest('.task');
+        const taskButtons = chosenTask.querySelector('.task-buttons');
 
         taskButtons.innerHTML = '';
+        if (event.target.classList.contains('remove-task')) {
+            chosenTask.remove();
+            console.log('hello');
+        } else {
+            const completeButton = createButton('complete-task', '✔');
+            const deleteButton = createButton('delete-task', '✖');
+    
+            taskButtons.append(completeButton);
+            taskButtons.append(deleteButton);
+    
+            activeTasks.append(chosenTask);
+        }
 
-        const completeButton = document.createElement('button')
-        const deleteButton = document.createElement('button');
-        completeButton.className = 'btn complete-task';
-        deleteButton.className = 'btn delete-task';
-        completeButton.textContent = '✔';
-        deleteButton.textContent = '✖';
-        taskButtons.append(completeButton);
-        taskButtons.append(deleteButton);
-
-        activeTasks.append(taskToRestore);
         updateTasksVisibility(selector.value);
     });
 
@@ -85,14 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const taskToRestore = event.target.closest('.task');
         const taskButtons = taskToRestore.querySelector('.task-buttons');
 
-        taskButtons.innerHTML = '';
+        taskButtons.innerHTML = '';        
 
-        const completeButton = document.createElement('button')
-        const deleteButton = document.createElement('button');
-        completeButton.className = 'btn complete-task';
-        deleteButton.className = 'btn delete-task';
-        completeButton.textContent = '✔';
-        deleteButton.textContent = '✖';
+        const completeButton = createButton('complete-task', '✔');
+        const deleteButton = createButton('delete-task', '✖');
+
         taskButtons.append(completeButton);
         taskButtons.append(deleteButton);
 
@@ -176,6 +175,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 deletedTasks.style.display = "block";
                 break;
         };
+    };
+    //this function returns button with custom html class and textContent
+    function createButton(htmlClass, text) {
+        const createdButton = document.createElement('button');
+        createdButton.className = 'btn ' + htmlClass;
+        createdButton.textContent = text;
+        return createdButton;
     };
 });
 
