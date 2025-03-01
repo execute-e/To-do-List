@@ -1,3 +1,4 @@
+let timerInterval;
 document.addEventListener('DOMContentLoaded', () => {
     const buttonAddTask = document.getElementById('add-task');
     
@@ -43,6 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
             deletedTasks.append(taskToDelete);
             updateTasksVisibility(selector.value);
             
+            Swal.fire({
+                title: "Successfully deleted!",
+                icon: "success",
+            });
         } else if (event.target.classList.contains('complete-task')) {
             const taskToConfirm = event.target.closest('.task');
             const taskButtons = taskToConfirm.querySelector('.task-buttons');
@@ -55,6 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             completedTasks.append(taskToConfirm);
             updateTasksVisibility(selector.value);
+            
+            Swal.fire({
+                title: "Successfully completed!",
+                icon: "success",
+            });
         };
     });
 
@@ -67,8 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
         taskButtons.innerHTML = '';
         if (event.target.classList.contains('remove-task')) {
             chosenTask.remove();
-            console.log('hello');
-        } else {
+            
+            updateTasksVisibility(selector.value);
+            
+            Swal.fire({
+                title: "Successfully removed!",
+                icon: "success",
+            });
+        } else if (event.target.classList.contains('restore-task')) {
             const completeButton = createButton('complete-task', '✔');
             const deleteButton = createButton('delete-task', '✖');
     
@@ -76,27 +92,43 @@ document.addEventListener('DOMContentLoaded', () => {
             taskButtons.append(deleteButton);
     
             activeTasks.append(chosenTask);
+            
+            updateTasksVisibility(selector.value);
+            
+            Swal.fire({
+                title: "Successfully restored!",
+                icon: "success",
+            });
+
         }
 
-        updateTasksVisibility(selector.value);
+        
+        
     });
 
     //restore task from completed tasks listener
 
     completedTasks.addEventListener('click', (event) => {
-        const taskToRestore = event.target.closest('.task');
-        const taskButtons = taskToRestore.querySelector('.task-buttons');
-
-        taskButtons.innerHTML = '';        
-
-        const completeButton = createButton('complete-task', '✔');
-        const deleteButton = createButton('delete-task', '✖');
-
-        taskButtons.append(completeButton);
-        taskButtons.append(deleteButton);
-
-        activeTasks.append(taskToRestore);
-        updateTasksVisibility(selector.value);
+        if (event.target.classList.contains('restore-task')){
+            const taskToRestore = event.target.closest('.task');
+            const taskButtons = taskToRestore.querySelector('.task-buttons');
+    
+            taskButtons.innerHTML = '';        
+    
+            const completeButton = createButton('complete-task', '✔');
+            const deleteButton = createButton('delete-task', '✖');
+    
+            taskButtons.append(completeButton);
+            taskButtons.append(deleteButton);
+    
+            activeTasks.append(taskToRestore);
+            updateTasksVisibility(selector.value);
+            
+            Swal.fire({
+                title: "Successfully restored!",
+                icon: "success",
+            });
+        };
     });
 
     //selector listener 
@@ -108,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 completedTasks.style.display = "none";
                 deletedTasks.style.display = "none";
                 activeTasks.style.display = "block";
-                console.log(activeTasks.innerHTML);
                 break;
             case "completed":
                 deletedTasks.style.display = "none";
