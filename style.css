@@ -7,6 +7,10 @@
     font-size: 1.05em;
 }
 
+body {
+    background-color: #2F2FA2;
+}
+
 #main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -24,6 +28,7 @@
     border: 0.5px solid;
     border-radius: 5px;
     padding: 10px;
+    background-color: whitesmoke;
 }
 
 #select-tasks {
@@ -34,6 +39,10 @@
     display: flex;
     justify-content: right;
     padding: 10px;
+}
+
+#select select {
+    background-color: whitesmoke;
 }
 
 #content {
@@ -50,6 +59,7 @@
    border-radius: 5px;
    padding: 10px;
    margin: 0 0 1em 0;
+   background-color: whitesmoke;
 }
 
 .task-buttons {
@@ -62,7 +72,43 @@
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: antiquewhite;
+    cursor: pointer;
+}
+
+.complete-task {
+    background-color: rgb(95, 255, 95);
+}
+
+.complete-task:hover {
+    background-color: rgb(80, 216, 80);
+}
+
+.complete-task:active {
+    background-color: rgb(69, 187, 69);
+}
+
+.delete-task {
+    background-color: rgb(255, 59, 59);
+}
+
+.delete-task:hover {
+    background-color: rgb(221, 50, 50);
+}
+
+.delete-task:active {
+    background-color: rgb(196, 45, 45);
+}
+
+#add-task {
+    background-color: rgb(95, 255, 95);
+}
+
+#add-task:hover {
+    background-color: rgb(80, 216, 80);
+}
+
+#add-task:active {
+    background-color: rgb(69, 187, 69);
 }
 
 .example {
